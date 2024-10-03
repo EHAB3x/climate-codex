@@ -1,0 +1,6 @@
+@ClimateCodex.Server_HostAddress = http://localhost:5006
+
+GET {{ClimateCodex.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

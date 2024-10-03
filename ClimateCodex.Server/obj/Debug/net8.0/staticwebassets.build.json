@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "2UthLHQinRMO0SEzJ3qRVfrQzrjmQCuoMJtVRtZa3fM=",
+  "Source": "ClimateCodex.Server",
+  "BasePath": "_content/ClimateCodex.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\user\\source\\repos\\ClimateCodex\\climatecodex.client\\climatecodex.client.esproj",
+      "Version": 2,
+      "Source": "climatecodex.client",
+      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
