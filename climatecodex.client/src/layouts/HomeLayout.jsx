@@ -1,7 +1,7 @@
 import Hero from '../components/climaflow/Home/hero/Hero'
 import Insights from '../components/climaflow/Home/insights/Insights'
 import MovingText from '../components/climaflow/Home/movingText/MovingText'
-import Welcome from '../components/climaflow/Home/welcome/Welcome'
+import Co2 from '../components/climaflow/Home/co2/Co2'
 
 const HomeLayout = () => {
   return (
@@ -9,7 +9,7 @@ const HomeLayout = () => {
         <Hero />
         <MovingText />
         <Insights />
-        <Welcome />
+        <Co2 />
     </>
   )
 }

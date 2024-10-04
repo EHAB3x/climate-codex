@@ -1,14 +1,10 @@
-.welcome {
-  height: 100vh;
+.co2 {
   background-image: url("../../../../assets/images/welcome/welcome.png");
   background-repeat: no-repeat;
   background-size: cover;
-  .welcome__container {
+  .co2__container {
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .welcome__content {
+    .co2__content {
       flex: 1;
       h2 {
         font-weight: 400;
@@ -30,29 +26,37 @@
         color: $white-100;
       }
     }
-    .empty{
+    .gas__statisticts {
       flex: 1;
+      .gas__card {
+        border-radius: 2rem;
+        padding: 2.5rem 2rem;
+        background-color: rgba($color: $white-50, $alpha: 0.4);
+        backdrop-filter: blur(20px);  
+        .gas__level {
+          font-size: 1.2rem;
+          font-weight: 400;
+          line-height: 25.2px;
+          color: $white-100;
+          .gas__detail{
+            color: $primary-500;
+          }
+        }
+        .gas__name{
+          font-size: 1.2rem;
+          font-weight: 400;
+          line-height: 25.2px;
+          color: $white-100;
+        }
+      }
     }
   }
   @media screen and (max-width: $max_tablet) {
-    .welcome__container{
-      .welcome__content{
-        flex: 70%;
-      }
-      .empty{
-        flex: 30%;
-      }
-    }
-  }
-  @media screen and (max-width: $max_tablet) {
-    .welcome__container{
+    .co2__container {
       padding: 0 1.5rem;
       text-align: center;
-      .welcome__content{
+      .co2__content {
         flex: 1;
-      }
-      .empty{
-        display: none;
       }
     }
   }

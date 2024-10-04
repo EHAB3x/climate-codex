@@ -44,36 +44,6 @@ const Hero = () => {
                         <p><span>in atmosphere:</span> 0.04%</p>
                     </div>
                 </div>
-                <div className="gas__card flex sm:block sm:flex-col flex-row gap-4">
-                    <h4 className="gas__name">Temperature</h4>
-
-                    <div className="gas__content">
-                        <p><span>CO2 level:</span> 0.042%</p>
-                        <p><span>0.0002% - 0.0003%</span></p>
-                        <p><span>China emissions:</span> 28%</p>
-                        <p><span>in atmosphere:</span> 0.04%</p>
-                    </div>
-                </div>
-                <div className="gas__card flex sm:block sm:flex-col flex-row gap-4">
-                    <h4 className="gas__name">Temperature</h4>
-
-                    <div className="gas__content">
-                        <p><span>CO2 level:</span> 0.042%</p>
-                        <p><span>0.0002% - 0.0003%</span></p>
-                        <p><span>China emissions:</span> 28%</p>
-                        <p><span>in atmosphere:</span> 0.04%</p>
-                    </div>
-                </div>
-                <div className="gas__card flex sm:block sm:flex-col flex-row gap-4">
-                    <h4 className="gas__name">Temperature</h4>
-
-                    <div className="gas__content">
-                        <p><span>CO2 level:</span> 0.042%</p>
-                        <p><span>0.0002% - 0.0003%</span></p>
-                        <p><span>China emissions:</span> 28%</p>
-                        <p><span>in atmosphere:</span> 0.04%</p>
-                    </div>
-                </div>
                 
             </div>
         </div>
