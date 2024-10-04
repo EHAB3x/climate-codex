@@ -1,18 +1,37 @@
 import "../styles/login.scss"
 import Google from "../assets/svg/auth/google.svg?react";
 import Apple from "../assets/svg/auth/apple.svg?react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-
-  const login = (e)=>{
+  const navigate = useNavigate();
+  const login = (e) => {
     e.preventDefault();
-    fetch("https://localhost:7093/api/User",{
-      method: "GET",
+    fetch("https://localhost:7093/api/User/ValidateUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        email,
+      }),
     })
-  }
+      .then((response) => {
+        if (!response.ok) {
+          alert("Failed to Find account");
+        }
+        return response.json();
+      })
+      .then(() => {
+        navigate("/")
+      })
+      .catch((error) => {
+        alert("Error:", error);
+      });
+  };
   return (
     <div className="auth__form">
         <div className="auth_container flex flex-col gap-12">

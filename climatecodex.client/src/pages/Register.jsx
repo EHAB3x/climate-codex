@@ -2,35 +2,36 @@ import "../styles/login.scss";
 import { useState } from "react";
 import Google from "../assets/svg/auth/google.svg?react";
 import Apple from "../assets/svg/auth/apple.svg?react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-    const register = (e) => {
-        e.preventDefault();
-        fetch("https://localhost:7093/api/User", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                Username: username,
-                Email: email,
-            }),
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Failed to create account");
-                }
-                return response.json();
-            })
-            .then((data) => {
-                console.log("User registered successfully:", data);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    };
+  const navigate = useNavigate("");
+  const register = (e) => {
+    e.preventDefault();
+    fetch("https://localhost:7093/api/User/Register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        email,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          alert("Failed to create account");
+        }
+        return response.json();
+      })
+      .then(() => {
+        navigate("/")
+      })
+      .catch((error) => {
+        alert("Error:", error);
+      });
+  };
 
   return (
     <div className="auth__form">
