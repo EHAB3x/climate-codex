@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClimateCodex.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6a648c2add695f566b6b8fc696a48caa7ba3a630")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c3e90d40d968fede7f6f6db01632d9333ebbb20")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClimateCodex.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClimateCodex.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
