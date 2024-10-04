@@ -1,11 +1,13 @@
 ﻿using ClimateCodex.Server.Repository;
-using ClimateCodex.Server.Models; 
+using ClimateCodex.Server.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace ClimateCodex.Server.Controllers
 {
-    public class RegionController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class RegionController : ControllerBase
     {
         private readonly IRegionRepo _regionRepo;
 
@@ -15,72 +17,56 @@ namespace ClimateCodex.Server.Controllers
         }
 
         
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult GetAllRegions()
         {
             var regions = _regionRepo.GetAllRegions();
-            return View(regions); 
+            return Ok(regions); 
         }
 
         
-        public IActionResult Details(int id)
+        [HttpGet("{id}")]
+        public IActionResult GetRegionById(int id)
         {
             var region = _regionRepo.GetRegionById(id);
             if (region == null)
             {
-                return NotFound();
+                return NotFound(); 
             }
-            return View(region); 
-        }
-
-       
-        public IActionResult Create()
-        {
-            return View(); 
+            return Ok(region); 
         }
 
         
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(Region region)
+        public IActionResult Create([FromBody] Region region)
         {
             if (ModelState.IsValid)
             {
                 _regionRepo.AddRegion(region);
-                return RedirectToAction(nameof(Index));
+                return CreatedAtAction(nameof(GetRegionById), new { id = region.RegionId }, region); 
             }
-            return View(region);
-        }
-
-        
-        public IActionResult Edit(int id)
-        {
-            var region = _regionRepo.GetRegionById(id);
-            if (region == null)
-            {
-                return NotFound();
-            }
-            return View(region);
+            return BadRequest(ModelState); 
         }
 
        
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Region region)
+        [HttpPut("{id}")]
+        public IActionResult Edit(int id, [FromBody] Region region)
         {
             if (id != region.RegionId)
             {
-                return NotFound();
+                return BadRequest(); 
             }
 
             if (ModelState.IsValid)
             {
                 _regionRepo.UpdateRegion(region);
-                return RedirectToAction(nameof(Index));
+                return NoContent(); 
             }
-            return View(region);
+            return BadRequest(ModelState); 
         }
 
-       
+        
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             var region = _regionRepo.GetRegionById(id);
@@ -88,16 +74,9 @@ namespace ClimateCodex.Server.Controllers
             {
                 return NotFound();
             }
-            return View(region);
-        }
 
-        
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
             _regionRepo.DeleteRegion(id);
-            return RedirectToAction(nameof(Index));
+            return NoContent(); 
         }
     }
 }

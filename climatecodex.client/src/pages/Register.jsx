@@ -6,16 +6,32 @@ import { Link } from "react-router-dom";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+    const register = (e) => {
+        e.preventDefault();
+        fetch("https://localhost:7093/api/User", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                Username: username,
+                Email: email,
+            }),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to create account");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log("User registered successfully:", data);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    };
 
-  const register = (e) => {
-    e.preventDefault();
-    fetch("https://localhost:7093/api/User", {
-      method: "POST",
-    },{
-        Username: username,
-        Email: email,
-    });
-  };
   return (
     <div className="auth__form">
       <div className="auth_container flex flex-col gap-12">
@@ -36,7 +52,7 @@ const Register = () => {
           <div className="input__field">
             <label htmlFor="email">Email</label>
             <input
-              type="email"
+              type="text"
               name="Email"
               id="email"
               placeholder="Enter your email"

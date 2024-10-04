@@ -6,7 +6,7 @@ namespace ClimateCodex.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ControllerBase // Use ControllerBase for APIs
+    public class UserController : ControllerBase 
     {
         private readonly IUserRepo _userRepo;
 
@@ -15,7 +15,7 @@ namespace ClimateCodex.Server.Controllers
             _userRepo = userRepo;
         }
 
-        // Get all users (returns JSON)
+        
         [HttpGet]
         public JsonResult GetAllUsers()
         {
@@ -23,7 +23,7 @@ namespace ClimateCodex.Server.Controllers
             return new JsonResult(users);
         }
 
-        // Get user by ID (returns JSON)
+        
         [HttpGet("{id}")]
         public IActionResult GetUserById(int id)
         {
@@ -31,10 +31,10 @@ namespace ClimateCodex.Server.Controllers
             if (user == null)
                 return NotFound();
 
-            return Ok(user); // Returns JSON by default
+            return Ok(user); 
         }
 
-        // Create a new user (returns JSON)
+        
         [HttpPost]
         public IActionResult CreateUser([FromBody] User user)
         {
@@ -45,7 +45,7 @@ namespace ClimateCodex.Server.Controllers
             return Ok(new { message = "User created successfully" });
         }
 
-        // Update user (returns JSON)
+        
         [HttpPut("{id}")]
         public IActionResult EditUser(int id, [FromBody] User user)
         {
@@ -60,7 +60,7 @@ namespace ClimateCodex.Server.Controllers
             return Ok(new { message = "User updated successfully" });
         }
 
-        // Delete user (returns JSON)
+        
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)
         {
