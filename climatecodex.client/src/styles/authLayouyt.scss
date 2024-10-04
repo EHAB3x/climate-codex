@@ -12,4 +12,10 @@ body{
         border-top-left-radius: 2.8rem;
         border-bottom-left-radius: 2.8rem;
     }
+    @media screen and (max-width:$max_tablet){
+        .auth__background{
+            padding: 0 1.5rem;
+            display: none;
+        }
+    }
 }

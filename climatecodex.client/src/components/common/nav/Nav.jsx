@@ -6,12 +6,6 @@ import { FiMenu } from "react-icons/fi";
 import { IoCloseCircleOutline } from "react-icons/io5";
 const Nav = () => {
     const [isOpen, setIsOpen] = useState(false);
-
-    useEffect(() => {
-        fetch("https://localhost:7093/api/User/1")
-            .then(res => res.json())
-            .then(data => console.log(data));
-    },[])
   return (
     <>
       <nav className="header">
