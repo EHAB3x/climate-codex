@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./nav.scss";
 import Logo from "../../../assets/svg/logo.svg?react";
 import { FiMenu } from "react-icons/fi";
 import { IoCloseCircleOutline } from "react-icons/io5";
 const Nav = () => {
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        fetch("https://localhost:7093/api/User/1")
+            .then(res => res.json())
+            .then(data => console.log(data));
+    },[])
   return (
     <>
       <nav className="header">

@@ -12,14 +12,25 @@ namespace ClimateCodex.Server
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews(); // Change this to use MVC pattern with views
+            builder.Services.AddControllersWithViews(); // Enable MVC pattern with views
 
+            // Register your repositories with dependency injection
             builder.Services.AddScoped<IUserRepo, UserRepo>();
             builder.Services.AddScoped<IEmissionDataRepo, EmissionDataRepo>();
             builder.Services.AddScoped<IGHGTypeRepo, GHGTypeRepo>();
             builder.Services.AddScoped<IClimateDataRepo, ClimateDataRepo>();
             builder.Services.AddScoped<IRegionRepo, RegionRepo>();
 
+            // Add CORS configuration
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReactApp", policy =>
+                {
+                    policy.WithOrigins("https://localhost:5173") // Add your React app's URL here
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
 
             // Configure DbContext with SQL Server
             builder.Services.AddDbContext<ClimateCodexDbContext>(options =>
@@ -30,6 +41,9 @@ namespace ClimateCodex.Server
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            // Enable CORS in the HTTP request pipeline
+            app.UseCors("AllowReactApp");
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
