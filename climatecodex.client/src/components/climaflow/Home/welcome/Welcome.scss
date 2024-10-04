@@ -1,0 +1,59 @@
+.welcome {
+  height: 100vh;
+  background-image: url("../../../../assets/images/welcome/welcome.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  .welcome__container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .welcome__content {
+      flex: 1;
+      h2 {
+        font-weight: 400;
+        font-size: 3rem;
+        line-height: 3rem;
+        span {
+          background: linear-gradient(90deg, #059464 0%, #39f9b9 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          color: transparent;
+        }
+      }
+
+      p {
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 2.25rem;
+        color: $white-100;
+      }
+    }
+    .empty{
+      flex: 1;
+    }
+  }
+  @media screen and (max-width: $max_tablet) {
+    .welcome__container{
+      .welcome__content{
+        flex: 70%;
+      }
+      .empty{
+        flex: 30%;
+      }
+    }
+  }
+  @media screen and (max-width: $max_tablet) {
+    .welcome__container{
+      padding: 0 1.5rem;
+      text-align: center;
+      .welcome__content{
+        flex: 1;
+      }
+      .empty{
+        display: none;
+      }
+    }
+  }
+}
