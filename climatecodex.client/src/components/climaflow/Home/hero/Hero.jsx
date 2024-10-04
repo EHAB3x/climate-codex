@@ -6,7 +6,7 @@ const Hero = () => {
     <section className="hero__section">
         <RightLine  className="absolute bottom-0 right-0"/>
         <LeftLine  className="absolute top-0 left-0 sm:block hidden"/>
-        <div className="hero__container container mx-auto flex sm:justify-center justify-start sm:items-center items-start gap-8 h-full">
+        <div className="hero__container container mx-auto flex justify-center sm:items-center items-start gap-8 h-full">
             <div className="hero__content relative flex flex-col gap-7 flex-1">
                 <h2>Welcome to, <span>ClimateFlow</span></h2>
 
