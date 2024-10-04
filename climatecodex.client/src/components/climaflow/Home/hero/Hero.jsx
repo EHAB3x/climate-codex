@@ -1,10 +1,13 @@
 import './Hero.scss'
-
+import RightLine from "../../../../assets/svg/hero/right-lines.svg?react"
+import LeftLine from "../../../../assets/svg/hero/left-lines.svg?react"
 const Hero = () => {
   return (
     <section className="hero__section">
+        <RightLine  className="absolute bottom-0 right-0"/>
+        <LeftLine  className="absolute top-0 left-0 sm:block hidden"/>
         <div className="hero__container container mx-auto flex sm:justify-center justify-start sm:items-center items-start gap-8 h-full">
-            <div className="hero__content flex flex-col gap-7 flex-1">
+            <div className="hero__content relative flex flex-col gap-7 flex-1">
                 <h2>Welcome to, <span>ClimateFlow</span></h2>
 
                 <p>Harnessing open-source climate data from the U.S. GHG Center, we aim to create an intuitive, data-driven narrative about our planet’s changing climate. Explore interactive insights, understand the impacts of greenhouse gases, and discover actionable solutions. Together, let’s turn data into meaningful stories that inspire change!</p>
