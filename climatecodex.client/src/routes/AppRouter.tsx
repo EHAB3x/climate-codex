@@ -2,6 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import HomeLayout from "../layouts/HomeLayout";
+import AuthLayout from "../layouts/AuthLayout";
 
 const router = createBrowserRouter([
     {
@@ -13,6 +14,15 @@ const router = createBrowserRouter([
             element: <HomeLayout />
           }
         ]     
+    },{
+      path:"/auth",
+      element: <AuthLayout />,
+      children:[
+        {
+          path:"/auth/login",
+          element:<p className="flex-1">Login</p>
+        }
+      ]
     }
 ])
 

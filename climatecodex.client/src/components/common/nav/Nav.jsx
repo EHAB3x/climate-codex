@@ -35,7 +35,7 @@ const Nav = () => {
         </div>
 
         <div className="  nav__actions">
-          <Link to={"/login"} className="primary__btn">
+          <Link to={"/auth/login"} className="primary__btn">
             Login
           </Link>
         </div>
@@ -62,7 +62,7 @@ const Nav = () => {
           </ul>
 
           <div className=" nav__actions">
-            <Link to={"/login"} className="primary__btn w-full">
+            <Link to={"/auth/login"} className="primary__btn w-full">
               Login
             </Link>
           </div>
