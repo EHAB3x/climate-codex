@@ -25,9 +25,6 @@ const GasPage = () => {
             },
           })
             .then((response) => {
-              if (!response.ok) {
-                alert("Failed to get gas information");
-              }
               return response.json();
             })
             .then((data) => {
@@ -37,13 +34,19 @@ const GasPage = () => {
               alert("Error:", error);
             });
     },[gasId]);
-    console.log(gasInfo);
     
   return (
     <div className="gas__page">
         <div className="gas__container container mx-auto">
-            <h2 className="gas__name">Carbon Dioxide (CO<sub>2</sub>)</h2> 
-
+            <h2 className="gas__name">{gasInfo.gasName}</h2>
+            <div className="faqs flex flex-col gap-6">
+              {gasInfo.questions.map((ele, index)=>(
+                  <div className="faq flex flex-col gap-4" key={index}>
+                    <p className="question">{ele.question}</p>
+                    <p className="answer">{ele.answer}</p>
+                  </div>
+              ))}
+            </div> 
         </div>
     </div>
   )

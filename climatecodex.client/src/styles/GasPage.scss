@@ -11,5 +11,15 @@
       line-height: 3rem;
       color: $primary-100;
     }
+    .faqs{
+      .faq{
+        .question{
+          color:$question-color;
+        }
+        .answer{
+          color: white;
+        }
+      }
+    }
   }
 }
