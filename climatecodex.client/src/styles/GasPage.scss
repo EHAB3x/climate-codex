@@ -1,0 +1,15 @@
+.gas__page {
+  padding-top: 180px;
+  background-image: url("../assets/images/gas-page/co2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  .gas__container {
+    .gas__name {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 3rem;
+      color: $primary-100;
+    }
+  }
+}

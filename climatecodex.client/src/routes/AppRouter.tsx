@@ -5,6 +5,7 @@ import HomeLayout from "../layouts/HomeLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import GasPage from "../pages/gasPage";
 
 const router = createBrowserRouter([
     {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <HomeLayout />
+          },
+          {
+            path:"gas/:gasName",
+            element:<GasPage />
           }
         ]     
     },{

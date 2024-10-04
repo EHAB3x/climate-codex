@@ -14,7 +14,7 @@ const Co2 = () => {
             High levels of CO2 in the air can significantly impact both climate and health, making it essential to monitor. Discover how CO2 concentrations affect your surroundings and what steps you can take to stay informed.
           </p>
 
-          <Link to={"/co2"} className="secondary__btn">Track CO2 Impact</Link>
+          <Link to={"/gas/co2"} className="secondary__btn">Track CO2 Impact</Link>
         </div>
 
         <div className="gas__statisticts flex flex-col items-center gap-6">
