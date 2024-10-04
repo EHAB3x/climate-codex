@@ -6,6 +6,7 @@ nav {
   top: 0;
   transform: translateX(-50%);
   width: 100%;
+  z-index: 999;
   .nav__logo {
     .logo__name {
       background: linear-gradient(90deg, #3498db, #2ecc71);
@@ -33,7 +34,8 @@ nav {
     }
   }
 
-  .small__screen{
+  .mobile__nav,
+  .menu__toggle{
     display: none;
   }
 
@@ -52,14 +54,15 @@ nav {
   @media screen and (max-width: $max_tablet){
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    .large__screen{
+    .nav__links,
+    .nav__actions{
       display: none;
     }
-    .small__screen{
-      display: unset;
+    .mobile__nav,
+    .menu__toggle{
+      display: flex;
     }
     .mobile__nav{
-      display: flex;
       position: fixed;
       background: $primary-900;
       left: -120%;
@@ -70,6 +73,10 @@ nav {
       padding: 1.5rem;
       &.open{
         left: calc(0%);
+      }
+      .nav__links,
+      .nav__actions{
+        display: flex;
       }
     }
   }
