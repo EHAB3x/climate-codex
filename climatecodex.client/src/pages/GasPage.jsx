@@ -3,7 +3,9 @@ import '../styles/GasPage.scss';
 import { useParams } from 'react-router-dom';
 
 const GasPage = () => {
-    const [gasInfo, setGasInfo] = useState([]);
+    const [gasName_1, setGasName] = useState("");
+    const [questions, setQuestions] = useState([]);
+
     const {gasName} = useParams();
     let gasId;
     switch (gasName) {
@@ -28,19 +30,22 @@ const GasPage = () => {
               return response.json();
             })
             .then((data) => {
-              setGasInfo(data);
+                setGasName(data.gasName);
+                setQuestions(data.questions);
             })
             .catch((error) => {
               alert("Error:", error);
             });
-    },[gasId]);
-    
-  return (
+    }, [gasId]);
+    console.log(gasName_1);
+    console.log(questions);
+
+    return (
     <div className="gas__page">
-        <div className="gas__container container mx-auto">
-            <h2 className="gas__name">{gasInfo.gasName}</h2>
-            <div className="faqs flex flex-col gap-6">
-              {gasInfo.questions.map((ele, index)=>(
+            <div className="gas__container container mx-auto">
+                <h2 className="gas__name">{gasName_1}</h2>
+                <div className="faqs flex flex-col gap-6">
+                    {questions.map((ele, index) => (
                   <div className="faq flex flex-col gap-4" key={index}>
                     <p className="question">{ele.question}</p>
                     <p className="answer">{ele.answer}</p>
