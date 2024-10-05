@@ -3,6 +3,7 @@ import Insights from '../components/climaflow/Home/insights/Insights'
 import MovingText from '../components/climaflow/Home/movingText/MovingText'
 import Co2 from '../components/climaflow/Home/co2/Co2'
 import Methane from '../components/climaflow/Home/methane/Methane'
+import Balance from '../components/climaflow/Home/balance/Balance'
 
 const HomeLayout = () => {
   return (
@@ -12,6 +13,7 @@ const HomeLayout = () => {
         <Insights />
         <Co2 />
         <Methane />
+        <Balance />
     </>
   )
 }
