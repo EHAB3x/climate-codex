@@ -1,12 +1,13 @@
 ﻿using ClimateCodex.Server.Models;
 using ClimateCodex.Server.Repository;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace ClimateCodex.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ControllerBase 
+    public class UserController : ControllerBase
     {
         private readonly IUserRepo _userRepo;
 
@@ -15,7 +16,6 @@ namespace ClimateCodex.Server.Controllers
             _userRepo = userRepo;
         }
 
-        
         [HttpGet]
         public JsonResult GetAllUsers()
         {
@@ -23,7 +23,6 @@ namespace ClimateCodex.Server.Controllers
             return new JsonResult(users);
         }
 
-        
         [HttpGet("{id}")]
         public IActionResult GetUserById(int id)
         {
@@ -31,21 +30,25 @@ namespace ClimateCodex.Server.Controllers
             if (user == null)
                 return NotFound();
 
-            return Ok(user); 
+            return Ok(user);
         }
 
-        
-        [HttpPost]
-        public IActionResult CreateUser([FromBody] User user)
+        [HttpPost("Register")]
+        public IActionResult RegisterUser([FromBody] User user)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            if (_userRepo.GetAll().Any(u => u.Email == user.Email))
+                return BadRequest(new { message = "Email is already registered." });
+
+            if (_userRepo.GetAll().Any(u => u.Username == user.Username))
+                return BadRequest(new { message = "Username is already taken." });
+
             _userRepo.Add(user);
-            return Ok(new { message = "User created successfully" });
+            return Ok(new { message = "User registered successfully" });
         }
 
-        
         [HttpPut("{id}")]
         public IActionResult EditUser(int id, [FromBody] User user)
         {
@@ -56,11 +59,13 @@ namespace ClimateCodex.Server.Controllers
             if (existingUser == null)
                 return NotFound();
 
-            _userRepo.Update(user);
+            existingUser.Email = user.Email;
+            existingUser.Username = user.Username;
+
+            _userRepo.Update(existingUser);
             return Ok(new { message = "User updated successfully" });
         }
 
-        
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)
         {
@@ -70,6 +75,20 @@ namespace ClimateCodex.Server.Controllers
 
             _userRepo.DeleteById(id);
             return Ok(new { message = "User deleted successfully" });
+        }
+
+        [HttpPost("ValidateUser")]
+        public IActionResult ValidateUser([FromBody] User user)
+        {
+            var existingUser = _userRepo.GetAll()
+                .FirstOrDefault(u => u.Email == user.Email && u.Username == user.Username);
+
+            if (existingUser == null)
+            {
+                return BadRequest(new { message = "The email or username may be wrong." });
+            }
+
+            return Ok(existingUser);
         }
     }
 }

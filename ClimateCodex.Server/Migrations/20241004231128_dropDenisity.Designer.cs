@@ -3,6 +3,7 @@ using ClimateCodex.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClimateCodex.Server.Migrations
 {
     [DbContext(typeof(ClimateCodexDbContext))]
-    partial class ClimateCodexDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241004231128_dropDenisity")]
+    partial class dropDenisity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

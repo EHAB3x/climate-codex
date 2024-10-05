@@ -7,7 +7,7 @@
         public int Year { get; set; }
         public float CO2Emissions { get; set; }
         public float MethaneEmissions { get; set; }
-        public float PopulationDensity { get; set; }
+        
 
         
     }

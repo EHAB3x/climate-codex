@@ -37,8 +37,6 @@ const GasPage = () => {
               alert("Error:", error);
             });
     }, [gasId]);
-    console.log(gasName_1);
-    console.log(questions);
 
     return (
     <div className="gas__page">

@@ -3,6 +3,7 @@ using ClimateCodex.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClimateCodex.Server.Migrations
 {
     [DbContext(typeof(ClimateCodexDbContext))]
-    partial class ClimateCodexDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241004202750_login")]
+    partial class login
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,6 +36,9 @@ namespace ClimateCodex.Server.Migrations
                         .HasColumnType("real");
 
                     b.Property<float>("MethaneEmissions")
+                        .HasColumnType("real");
+
+                    b.Property<float>("PopulationDensity")
                         .HasColumnType("real");
 
                     b.Property<string>("Region")
@@ -131,7 +137,8 @@ namespace ClimateCodex.Server.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.HasKey("Id");
 
