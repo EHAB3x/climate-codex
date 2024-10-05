@@ -1,12 +1,12 @@
 ﻿using ClimateCodex.Server.Repository;
 using ClimateCodex.Server.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 
 namespace ClimateCodex.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]  
     public class RegionController : ControllerBase
     {
         private readonly IRegionRepo _regionRepo;
@@ -16,7 +16,6 @@ namespace ClimateCodex.Server.Controllers
             _regionRepo = regionRepo;
         }
 
-        
         [HttpGet]
         public IActionResult GetAllRegions()
         {
@@ -24,19 +23,17 @@ namespace ClimateCodex.Server.Controllers
             return Ok(regions); 
         }
 
-        
         [HttpGet("{id}")]
         public IActionResult GetRegionById(int id)
         {
             var region = _regionRepo.GetRegionById(id);
             if (region == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
             return Ok(region); 
         }
 
-        
         [HttpPost]
         public IActionResult Create([FromBody] Region region)
         {
@@ -45,27 +42,25 @@ namespace ClimateCodex.Server.Controllers
                 _regionRepo.AddRegion(region);
                 return CreatedAtAction(nameof(GetRegionById), new { id = region.RegionId }, region); 
             }
-            return BadRequest(ModelState); 
+            return BadRequest(ModelState);
         }
 
-       
         [HttpPut("{id}")]
         public IActionResult Edit(int id, [FromBody] Region region)
         {
             if (id != region.RegionId)
             {
-                return BadRequest(); 
+                return BadRequest();
             }
 
             if (ModelState.IsValid)
             {
                 _regionRepo.UpdateRegion(region);
-                return NoContent(); 
+                return NoContent();
             }
-            return BadRequest(ModelState); 
+            return BadRequest(ModelState);
         }
 
-        
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -76,7 +71,7 @@ namespace ClimateCodex.Server.Controllers
             }
 
             _regionRepo.DeleteRegion(id);
-            return NoContent(); 
+            return NoContent();
         }
     }
 }

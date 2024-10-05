@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ClimateCodex.Server.Models;
-using ClimateCodex.Server.Data;
 using ClimateCodex.Server.Repository;
 
 namespace ClimateCodex.Server.Controllers
 {
-    public class EmissionDataController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    [Produces("application/json")] 
+    public class EmissionDataController : ControllerBase
     {
         private readonly IEmissionDataRepo _repo;
 
@@ -15,93 +16,74 @@ namespace ClimateCodex.Server.Controllers
             _repo = repo;
         }
 
-        
+        [HttpGet]
         public IActionResult Index()
         {
             var emissions = _repo.GetAllEmissionData();
-            return View(emissions);
+            return Ok(emissions); 
         }
 
-        
+        [HttpGet("{id}")]
         public IActionResult Details(int id)
         {
             var emission = _repo.GetEmissionDataById(id);
             if (emission == null)
             {
-                return NotFound();
+                return NotFound(); 
             }
-            return View(emission);
+            return Ok(emission); 
         }
 
-        
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(EmissionData emissionData)
+        public IActionResult Create([FromBody] EmissionData emissionData)
         {
             if (ModelState.IsValid)
             {
                 _repo.AddEmissionData(emissionData);
                 _repo.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return CreatedAtAction(nameof(Details), new { id = emissionData.EmissionDataId }, emissionData); 
             }
-            return View(emissionData);
+            return BadRequest(ModelState); 
         }
 
-        
-        public IActionResult Edit(int id)
-        {
-            var emission = _repo.GetEmissionDataById(id);
-            if (emission == null)
-            {
-                return NotFound();
-            }
-            return View(emission);
-        }
-
-       
-        [HttpPost]
+        [HttpPut("{id}")]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, EmissionData emissionData)
+        public IActionResult Edit(int id, [FromBody] EmissionData emissionData)
         {
             if (id != emissionData.EmissionDataId)
             {
-                return BadRequest();
+                return BadRequest(); 
             }
 
             if (ModelState.IsValid)
             {
                 _repo.UpdateEmissionData(emissionData);
                 _repo.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return NoContent(); 
             }
-            return View(emissionData);
+            return BadRequest(ModelState); 
         }
 
-       
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             var emission = _repo.GetEmissionDataById(id);
             if (emission == null)
             {
-                return NotFound();
+                return NotFound(); 
             }
-            return View(emission);
+            return Ok(emission); 
         }
 
-        
-        [HttpPost, ActionName("Delete")]
+        // DELETE confirmed
+        [HttpPost("{id}/delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
             _repo.DeleteEmissionData(id);
             _repo.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            return NoContent(); 
         }
     }
 }

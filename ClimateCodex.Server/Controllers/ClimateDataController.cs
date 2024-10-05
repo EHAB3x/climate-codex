@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ClimateCodex.Server.Data; 
+using ClimateCodex.Server.Repository;
 using ClimateCodex.Server.Models;
-using ClimateCodex.Server.Repository; 
 
 namespace ClimateCodex.Server.Controllers
 {
-    public class ClimateDataController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    [Produces("application/json")] // Ensures the output is JSON
+    public class ClimateDataController : ControllerBase
     {
         private readonly IClimateDataRepo _climateDataRepo;
 
@@ -14,90 +16,63 @@ namespace ClimateCodex.Server.Controllers
             _climateDataRepo = climateDataRepo;
         }
 
-       
+        [HttpGet]
         public IActionResult Index()
         {
             var climateDataList = _climateDataRepo.GetAllClimateData();
-            return View(climateDataList);
+            return Ok(climateDataList); // Returns JSON
         }
 
-        
+        [HttpGet("{id}")]
         public IActionResult Details(int id)
         {
             var climateData = _climateDataRepo.GetClimateDataById(id);
             if (climateData == null)
             {
-                return NotFound();
+                return NotFound(); // Returns 404 if not found
             }
-            return View(climateData);
+            return Ok(climateData); 
         }
 
-       
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ClimateData climateData)
+        public IActionResult Create([FromBody] ClimateData climateData)
         {
             if (ModelState.IsValid)
             {
                 _climateDataRepo.AddClimateData(climateData);
-                return RedirectToAction(nameof(Index));
+                return CreatedAtAction(nameof(Details), new { id = climateData.Id }, climateData); 
             }
-            return View(climateData);
+            return BadRequest(ModelState); 
         }
 
-       
-        public IActionResult Edit(int id)
-        {
-            var climateData = _climateDataRepo.GetClimateDataById(id);
-            if (climateData == null)
-            {
-                return NotFound();
-            }
-            return View(climateData);
-        }
-
-        
-        [HttpPost]
+        [HttpPut("{id}")]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, ClimateData climateData)
+        public IActionResult Edit(int id, [FromBody] ClimateData climateData)
         {
             if (id != climateData.Id)
             {
-                return NotFound();
+                return BadRequest(); 
             }
 
             if (ModelState.IsValid)
             {
                 _climateDataRepo.UpdateClimateData(climateData);
-                return RedirectToAction(nameof(Index));
+                return NoContent(); 
             }
-            return View(climateData);
+            return BadRequest(ModelState); 
         }
 
-       
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             var climateData = _climateDataRepo.GetClimateDataById(id);
             if (climateData == null)
             {
-                return NotFound();
+                return NotFound(); 
             }
-            return View(climateData);
-        }
-
-        
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
             _climateDataRepo.DeleteClimateData(id);
-            return RedirectToAction(nameof(Index));
+            return NoContent(); 
         }
     }
 }
