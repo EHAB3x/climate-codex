@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./nav.scss";
 import Logo from "../../../assets/svg/logo.svg?react";
@@ -12,7 +12,7 @@ const Nav = () => {
         <div className="container mx-auto flex items-center justify-between py-4">
         <Link to={"/"} className="nav__logo flex items-center gap-6">
           <Logo />
-          <p className="logo__name">ClimateFlow</p>
+          <p className="logo__name">GreenMatrix</p>
         </Link>
 
         <ul className=" nav__links flex items-center gap-4">

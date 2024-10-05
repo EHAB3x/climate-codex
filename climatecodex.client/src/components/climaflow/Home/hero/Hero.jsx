@@ -8,7 +8,7 @@ const Hero = () => {
         <LeftLine  className="absolute top-[-100px] left-0 sm:block hidden"/>
         <div className="hero__container container mx-auto flex justify-center sm:items-center items-start gap-8 h-full">
             <div className="hero__content relative flex flex-col gap-7 flex-1">
-                <h2>Welcome to, <span>ClimateFlow</span></h2>
+                <h2>Welcome to, <span>GreenMatrix</span></h2>
 
                 <p>Harnessing open-source climate data from the U.S. GHG Center, we aim to create an intuitive, data-driven narrative about our planet’s changing climate. Explore interactive insights, understand the impacts of greenhouse gases, and discover actionable solutions. Together, let’s turn data into meaningful stories that inspire change!</p>
             </div>
