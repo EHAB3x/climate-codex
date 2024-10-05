@@ -13,7 +13,7 @@ const Balance = () => {
           how preserving this balance is essential for a sustainable future.
         </p>
 
-        <Link to={"/auth/login"} className="secondary__btn">
+        <Link to={"/auth/login"} className="secondary__btn mt-4">
           Log in
         </Link>
       </div>
