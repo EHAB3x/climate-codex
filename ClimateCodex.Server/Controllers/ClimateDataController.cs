@@ -6,7 +6,7 @@ namespace ClimateCodex.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Produces("application/json")] // Ensures the output is JSON
+    [Produces("application/json")] 
     public class ClimateDataController : ControllerBase
     {
         private readonly IClimateDataRepo _climateDataRepo;
@@ -20,7 +20,7 @@ namespace ClimateCodex.Server.Controllers
         public IActionResult Index()
         {
             var climateDataList = _climateDataRepo.GetAllClimateData();
-            return Ok(climateDataList); // Returns JSON
+            return Ok(climateDataList); 
         }
 
         [HttpGet("{id}")]
@@ -29,7 +29,7 @@ namespace ClimateCodex.Server.Controllers
             var climateData = _climateDataRepo.GetClimateDataById(id);
             if (climateData == null)
             {
-                return NotFound(); // Returns 404 if not found
+                return NotFound();
             }
             return Ok(climateData); 
         }

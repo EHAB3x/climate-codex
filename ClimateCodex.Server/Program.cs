@@ -11,6 +11,9 @@ namespace ClimateCodex.Server
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Register HttpClient
+            builder.Services.AddHttpClient();
+
             // Add services to the container.
             builder.Services.AddControllersWithViews(); // Enable MVC pattern with views
 
