@@ -7,7 +7,7 @@ const TrackGas = () => {
     gas: "co2",
     location: "egypt",
     month: "1",
-    year: "2024",
+    year: "2000",
   });
 
   const [gasData, setGasData] = useState({
@@ -25,18 +25,14 @@ const TrackGas = () => {
   const TrackSelectedGas = (e) => {
     e.preventDefault();
     fetch(`https://localhost:7093/api/Co2Data/${formData.year}/${formData.month}`, {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        year:formData.year,
-        month: formData.month,
-      }),
     })
       .then((response) => {
         if (!response.ok) {
-          alert("Failed to Find account");
+          alert("Failed to get gas data");
         }
         return response.json();
       })
@@ -118,10 +114,10 @@ const TrackGas = () => {
                 value={formData.year}
                 onChange={handleChange}
               >
-                <option value="2021">2021</option>
-                <option value="2022">2022</option>
-                <option value="2023">2023</option>
-                <option value="2024">2024</option>
+                <option value="2000">2000</option>
+                <option value="2001">2001</option>
+                <option value="2002">2002</option>
+                <option value="2002">2003</option>
               </select>
             </div>
           </div>

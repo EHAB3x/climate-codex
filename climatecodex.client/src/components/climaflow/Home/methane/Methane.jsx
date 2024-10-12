@@ -20,7 +20,7 @@ const Methane = () => {
             Methane is a potent greenhouse gas that contributes heavily to climate change and can degrade air quality. Learn how methane levels affect your environment and find out ways to track and reduce its impact.
           </p>
 
-          <Link to={"/gas/track"} className="secondary__btn">Track Methane Impact</Link>
+          <Link to={"/gas/methane"} className="secondary__btn">More About CH<sub>4</sub></Link>
         </div>
       </div>
     </div>
