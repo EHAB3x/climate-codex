@@ -6,8 +6,12 @@ const TrackGas = () => {
   const [formData, setFormData] = useState({
     gas: "co2",
     location: "egypt",
-    month: "January",
-    year: "2023",
+    month: "1",
+    year: "2024",
+  });
+
+  const [gasData, setGasData] = useState({
+    tiles:["https://earth.gov/ghgcenter/api/raster/collections/odiac-ffco2-monthgrid-v2023/items/odiac-ffco2-monthgrid-v2023-odiac2023_1km_excl_intl_201904/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?assets=co2-emissions&color_formula=gamma+r+1.05&colormap_name=rainbow&rescale=-696.9116821289062%2C35331.6484375"]
   });
 
   const handleChange = (e) => {
@@ -17,8 +21,37 @@ const TrackGas = () => {
       [name]: value,
     }));
   };
+
+  const TrackSelectedGas = (e) => {
+    e.preventDefault();
+    fetch(`https://localhost:7093/api/Co2Data/${formData.year}/${formData.month}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        year:formData.year,
+        month: formData.month,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          alert("Failed to Find account");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setGasData(data)
+      })
+      .catch((error) => {
+        alert("Error:", error);
+      });
+  };
+
+  console.log(gasData);
+  
   return (
-    <div className="track__gas container mx-auto flex gap-8 mt-[110px] py-24">
+    <div className="track__gas container mx-auto flex sm:flex-row flex-col-reverse gap-8 mt-[110px] sm:py-24 py-0 sm:px-0 px-6 pb-12">
       <div className="gas__details flex-1">
         <h2>Track Gas <br/> Levels in Your Area</h2>
 
@@ -33,7 +66,7 @@ const TrackGas = () => {
                 onChange={handleChange}
               >
                 <option value="co2">
-                  CO<sub>2</sub>
+                  CO2
                 </option>
                 <option value="methane">Methane</option>
               </select>
@@ -62,18 +95,18 @@ const TrackGas = () => {
                 value={formData.month}
                 onChange={handleChange}
               >
-                <option value="January">January</option>
-                <option value="February">February</option>
-                <option value="March">March</option>
-                <option value="April">April</option>
-                <option value="May">May</option>
-                <option value="June">June</option>
-                <option value="July">July</option>
-                <option value="August">August</option>
-                <option value="September">September</option>
-                <option value="October">October</option>
-                <option value="November">November</option>
-                <option value="December">December</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
               </select>
             </div>
 
@@ -93,23 +126,29 @@ const TrackGas = () => {
             </div>
           </div>
 
-          <button type="submit" className="secondary__btn">Explore</button>
+          <button type="submit" className="secondary__btn" onClick={(e)=> TrackSelectedGas(e)}>Explore</button>
         </form>
       </div>
 
       <div className="gas__map flex-1">
         <MapContainer
-          center={[0, 0]}
-          zoom={2}
+            className="sm:h-full h-[40vh]"
+          center={[26.8206, 30.8025]}
+          minZoom={gasData.minzoom || 0}
+          zoom={5}
           style={{ height: "100%", width: "100%" }}
+          bounds={[
+            -180.0,
+            -90.0,
+            180.0,
+            90.0
+          ]}
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
           <TileLayer
-            url="https://earth.gov/ghgcenter/api/raster/collections/odiac-ffco2-monthgrid-v2023/items/odiac-ffco2-monthgrid-v2023-odiac2023_1km_excl_intl_201904/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?assets=co2-emissions&color_formula=gamma+r+1.05&colormap_name=rainbow&rescale=-696.9116821289062%2C35331.6484375"
-            attribution="&copy; <a href='https://earth.gov'>Earth.gov</a> contributors"
+            url={gasData.tiles.join() || "https://earth.gov/ghgcenter/api/raster/collections/odiac-ffco2-monthgrid-v2023/items/odiac-ffco2-monthgrid-v2023-odiac2023_1km_excl_intl_201904/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?assets=co2-emissions&color_formula=gamma+r+1.05&colormap_name=rainbow&rescale=-696.9116821289062%2C35331.6484375"}
           />
         </MapContainer>
       </div>
